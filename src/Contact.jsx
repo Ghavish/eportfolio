@@ -3,24 +3,6 @@ import { FaEnvelope, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa'
 
 import React, { useState } from 'react';
 
-const [isSent, setIsSent] = useState(false);
-
-const handleMailto = (e) => {
-  e.preventDefault();
-  
-  const email = "ghavish.subratty@umail.uom.ac.mu"; 
-  const subject = encodeURIComponent("Contact from Portfolio");
-  
-  // This triggers the user's email client
-  window.location.href = `mailto:${email}?subject=${subject}`;
-  
-  // Show the notification on site
-  setIsSent(true);
-  
-  // Reset the message after 5 seconds
-  setTimeout(() => setIsSent(false), 5000);
-};
-
 export default function Contact() {
   const socialLinks = [
     { name: 'Email', icon: FaEnvelope, url: 'mailto:ghavish.subratty@umail.uom.ac.mu', color: '#ea4335' },
@@ -29,6 +11,24 @@ export default function Contact() {
     // { name: 'Facebook', icon: FaFacebook, url: 'https://facebook.com/yourprofile', color: '#1877F2' },
   ];
 
+  const [isSent, setIsSent] = useState(false);
+
+  const handleMailto = (e) => {
+    e.preventDefault();
+    
+    const email = "ghavish.subratty@umail.uom.ac.mu"; 
+    const subject = encodeURIComponent("Contact from Portfolio");
+    
+    // This triggers the user's email client
+    window.location.href = `mailto:${email}?subject=${subject}`;
+    
+    // Show the notification on site
+    setIsSent(true);
+    
+    // Reset the message after 5 seconds
+    setTimeout(() => setIsSent(false), 5000);
+  };
+  
   return (
     <section id="contact" className="w-full bg-dark-bg py-24 md:py-32 relative overflow-hidden flex justify-center items-center">
       
