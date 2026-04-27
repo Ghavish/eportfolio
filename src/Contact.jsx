@@ -1,6 +1,26 @@
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
+import React, { useState } from 'react';
+
+const [isSent, setIsSent] = useState(false);
+
+const handleMailto = (e) => {
+  e.preventDefault();
+  
+  const email = "ghavish.subratty@umail.uom.ac.mu"; 
+  const subject = encodeURIComponent("Contact from Portfolio");
+  
+  // This triggers the user's email client
+  window.location.href = `mailto:${email}?subject=${subject}`;
+  
+  // Show the notification on site
+  setIsSent(true);
+  
+  // Reset the message after 5 seconds
+  setTimeout(() => setIsSent(false), 5000);
+};
+
 export default function Contact() {
   const socialLinks = [
     { name: 'Email', icon: FaEnvelope, url: 'mailto:ghavish.subratty@umail.uom.ac.mu', color: '#ea4335' },
@@ -97,13 +117,25 @@ export default function Contact() {
             </div>
 
             <motion.button 
-              type="submit"
+              type="button" 
+              onClick={handleMailto}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full py-4 mt-2 bg-brand-mid hover:bg-brand-light text-white font-bold rounded-lg transition-colors shadow-[0_0_15px_rgba(123,44,191,0.5)] cursor-pointer"
             >
-              Send Message
+              {isSent ? "Opening Email Client..." : "Send Message"}
             </motion.button>
+
+            {/* Notification Message */}
+            {isSent && (
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center text-sm text-purple-400 font-medium"
+              >
+                Redirecting to your mail app. I'll get back to you soon!
+              </motion.p>
+            )}
           </form>
         </motion.div>
 
