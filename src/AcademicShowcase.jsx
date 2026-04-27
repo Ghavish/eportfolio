@@ -5,6 +5,7 @@ import { FaBookOpen, FaUserTie, FaSearch, FaProjectDiagram, FaCertificate, FaUse
 import teamJaaduPdf from './assets/team-jaadu-presentation.pdf';
 import teamBuildingPdf from './assets/team-building-presentation.pdf';
 import businessPlanPdf from './assets/BusinessPlan.pdf';
+// Removed THE URL
 import vrSynopsisPdf from './assets/vr-synopsis.pdf';
 
 export default function AcademicShowcase() {
