@@ -5,7 +5,7 @@ import { FaBookOpen, FaUserTie, FaSearch, FaProjectDiagram, FaCertificate, FaUse
 import teamJaaduPdf from './assets/team-jaadu-presentation.pdf';
 import teamBuildingPdf from './assets/team-building-presentation.pdf';
 import businessPlanPdf from './assets/BusinessPlan.pdf';
-import vrSynopsisPdf from './assets/VR-Synopsis.pdf';
+import vrSynopsisPdf from './assets/VR-Synopsis.pdf?url';
 
 export default function AcademicShowcase() {
   const [activeTab, setActiveTab] = useState('reflection');
