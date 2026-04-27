@@ -14,7 +14,7 @@ import mariewindow from './assets/MarieInterface.png';
 import mariecode from './assets/SourceCode.png';
 import mariemult from './assets/multsubroutine.png';
 import mariediv from './assets/divsubroutine.png';
-import mariedocumentation from './marie-sim-documentation.pdf';
+import mariedocumentation from './assets/marie-sim-documentation.pdf';
 
 import matrixdeterminant from './assets/ExcelDeterminant.png';
 import matrixinverse from './assets/ExcelInverse.png';
