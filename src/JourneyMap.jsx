@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGraduationCap, FaLaptopCode, FaMicrochip, FaImages, FaChevronUp } from 'react-icons/fa';
 
+import appcup0 from './assets/Appcup0.jpeg';
+import appcup1 from './assets/Appcup1.jpeg';
+import appcup2 from './assets/Appcup2.jpeg';
+
 const journeyData = [
   {
     id: 'uni',
@@ -25,9 +29,9 @@ const journeyData = [
     icon: FaLaptopCode, 
     shortDesc: 'Immersed in a high-pressure environment to rapidly prototype software and develop teamwork skills.',
     images: [
-      '/Appcup0.jpeg', 
-      '/Appcup1.jpeg',
-      '/Appcup2.jpeg'
+      appcup0, 
+      appcup1,
+      appcup2
     ],
     details: [
       'Navigated strict time limits to prioritize essential features and implement agile cycles.',
