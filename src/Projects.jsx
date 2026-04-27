@@ -10,6 +10,20 @@ import MonteCarloCover from './assets/MonteCarloCover.jpeg';
 import monteResults from './assets/MonteCarlo.jpeg';
 import monteParams from './assets/Parameters.jpeg';
 
+import mariewindow from './assets/MarieInterface.png';
+import mariecode from './assets/SourceCode.png';
+import mariemult from './assets/multsubroutine.png';
+import mariediv from './assets/divsubroutine.png';
+import mariedocumentation from './marie-sim-documentation.pdf';
+
+import matrixdeterminant from './assets/ExcelDeterminant.png';
+import matrixinverse from './assets/ExcelInverse.png';
+import matrixdolittle from './assets/DOLITTLE.png';
+import matrixcrout from './assets/CROUT.png';
+import matrixiterative from './assets/GaussSeidel.png';
+import matrixsolvablesoe from './assets/SolvableSOE.png';
+import largepowermatrices from './assets/LargePowerMatrices.png';
+
 export default function Projects() {
   // State for the Lightbox
   const [selectedProject, setSelectedProject] = useState(null);
@@ -37,7 +51,7 @@ export default function Projects() {
         treadAlerts,   // The emergency action panel
         treadFilters   // The data tables and filtering
       ],
-      github: 'https://github.com/yourusername/tread',
+      // github: 'https://github.com/yourusername/tread',
       live: '#'
     },
     {
@@ -51,9 +65,42 @@ export default function Projects() {
         monteResults,  // The final charts/graphs
         monteParams    // The input/configuration screen
       ],
-      github: 'https://github.com/yourusername/monte-carlo',
+      // github: 'https://github.com/yourusername/monte-carlo',
       live: '#'
-    }
+    },
+    {
+      id: 'marie-solver',
+      title: 'MARIE Matrix Solver',
+      subtitle: '3x3 Matrix Unknowns via Cramer\'s Rule',
+      desc: 'A collaborative systems engineering project involving low-level hardware simulation. Developed custom assembly subroutines to handle complex matrix algebra in a 12-bit environment.',
+      stack: ['MARIE Assembly', 'Computer Architecture', 'Binary Logic'],
+      images: [
+        mariewindow,    // Main assembly code screenshot
+        mariecode,   // Flowchart of MULT/DIV routines
+        mariemult,      // Flowchart for multiplication subroutine
+        mariediv      // Flowchart for division subroutine 
+      ],
+      // github: 'https://github.com/yourusername/marie-cramer',
+      live: mariedocumentation
+    },
+    {
+      id: 'matrix-engine',
+      title: 'Matrix Analytics Engine',
+      subtitle: '4x4 Dynamic Computational Model',
+      desc: 'A high-performance mathematical engine supporting matrices up to size 4x4. Features automated solvers for linear systems, including LU Decomposition and iterative numerical methods with real-time error validation.',
+      stack: ['Excel', 'Mathematical Modeling', 'Logic Validation'],
+      images: [
+        matrixdeterminant, 
+        matrixinverse,      
+        matrixdolittle,
+        matrixcrout,
+        matrixiterative,
+        matrixsolvablesoe,
+        largepowermatrices      
+      ],
+      // github: 'https://github.com/yourusername/excel-matrix',
+      live: '#' 
+    },
   ];
 
   // Lightbox Navigation Functions
