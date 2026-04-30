@@ -180,14 +180,14 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4 mt-auto">
+                {/* <div className="flex items-center gap-4 mt-auto">
                   <a href={project.github} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors text-xl">
                     <FaGithub />
                   </a>
                   <a href={project.live} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-brand-light transition-colors text-xl">
                     <FaExternalLinkAlt />
                   </a>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           ))}
