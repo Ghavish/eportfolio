@@ -66,7 +66,7 @@ const journeyData = [
   }
 ];
 
-// 2. Automated Slideshow Component
+// Automated Slideshow Component
 const MiniGallery = ({ images }) => {
   const [index, setIndex] = useState(0);
 
@@ -147,16 +147,27 @@ export default function Journey() {
                     {item.id === 'appcup' && isExpanded && (
                       <motion.button
                         layout
+                        // Animated pulse effect to draw the eye
+                        animate={{ 
+                          boxShadow: ["0 0 0px rgba(123,44,191,0)", "0 0 15px rgba(123,44,191,0.5)", "0 0 0px rgba(123,44,191,0)"] 
+                        }}
+                        transition={{ repeat: Infinity, duration: 2 }}
                         onClick={(e) => {
-                          e.stopPropagation(); // Prevents card from closing
+                          e.stopPropagation();
                           setShowAppCupGallery(!showAppCupGallery);
                         }}
-                        className="mt-4 flex items-center gap-2 text-brand-light text-sm font-bold hover:text-white transition-colors"
+                        className="mt-6 flex items-center justify-center gap-3 w-full py-3 px-4 bg-brand-mid/20 hover:bg-brand-mid/40 text-brand-light border border-brand-mid/40 rounded-xl transition-all font-bold text-sm tracking-wide group"
                       >
-                        {showAppCupGallery ? <><FaChevronUp /> Hide Moments</> : <><FaImages /> View AppCup Moments</>}
+                        <FaImages className="text-lg group-hover:scale-120 transition-transform" />
+                        <span>{showAppCupGallery ? "HIDE GALLERY" : "EXPLORE APPCUP MOMENTS"}</span>
+                        <motion.span
+                          animate={{ x: showAppCupGallery ? 0 : [0, 5, 0] }}
+                          transition={{ repeat: Infinity, duration: 1.5 }}
+                        >
+                          {showAppCupGallery ? <FaChevronUp /> : "→"}
+                        </motion.span>
                       </motion.button>
                     )}
-                  </motion.div>
 
                   <AnimatePresence>
                     {isExpanded && (
