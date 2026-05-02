@@ -169,6 +169,8 @@ export default function Journey() {
                       </motion.button>
                     )}
 
+                  </motion.div>
+                  
                   <AnimatePresence>
                     {isExpanded && (
                       <motion.div
