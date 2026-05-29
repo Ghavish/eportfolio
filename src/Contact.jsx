@@ -86,6 +86,7 @@ export default function Contact() {
                   <Icon className="text-2xl text-gray-400 group-hover:text-white transition-colors" />
                 </motion.a>
               );
+
             })}
           </div>
         </motion.div>
