@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaTimes, FaChevronLeft, FaChevronRight, FaImages, FaTable } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaChevronLeft, FaChevronRight, FaImages, FaTable, FaHome, FaWallet, FaTools, FaShieldAlt } from 'react-icons/fa';
 
 import treadHero from './assets/ExecView.jpeg';
 import treadAlerts from './assets/TechnicianView.jpeg';
@@ -29,44 +29,85 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Lock body scroll when lightbox is open
+  // Lock body scroll and enable keyboard controls while the lightbox is open
   useEffect(() => {
-    if (selectedProject) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
+    if (!selectedProject) return;
+    document.body.style.overflow = 'hidden';
+    const count = selectedProject.images.length;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setSelectedProject(null);
+      if (e.key === 'ArrowRight') setCurrentImageIndex((i) => (i + 1) % count);
+      if (e.key === 'ArrowLeft') setCurrentImageIndex((i) => (i - 1 + count) % count);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKey);
+    };
   }, [selectedProject]);
 
   const projects = [
     {
+      id: 'molakaz',
+      title: 'MoLakaz',
+      subtitle: 'AI Household Chore Planner · 2026',
+      desc: 'A mobile app that splits household chores fairly around each person\'s free time, then confirms each chore with a before-and-after photo checked by SAM 3.1 on a cloud GPU. Voice input runs on Whisper, and an AI assistant can rearrange the week without breaking the fairness rules.',
+      stack: ['Expo', 'React Native', 'Python', 'FastAPI', 'Modal', 'SAM 3.1', 'Whisper'],
+      cover: { icon: FaHome, from: '#1e3a5f', to: '#3C096C', tag: 'Mobile · AI · GPU' },
+      github: 'https://github.com/Ghavish/MoLakaz',
+    },
+    {
+      id: 'mobudget',
+      title: 'MoBudget',
+      subtitle: 'Trilingual Money Planner · Finnovate Hackathon',
+      desc: 'A budgeting web app for young Mauritians in English, French and Kreol Morisien. AI reads payslips, receipts, camera scans and voice notes, and a deterministic affordability check marks each savings goal as Safe, Tight or Not yet, with an AI coach that answers from the user\'s own numbers.',
+      stack: ['React', 'Vite', 'Tailwind CSS', 'Firebase Auth', 'n8n', 'MongoDB', 'Gemini'],
+      cover: { icon: FaWallet, from: '#0f4c4c', to: '#312e81', tag: 'Web · Fintech · AI' },
+      github: 'https://github.com/Ghavish/Finnovate-Cache-Me-Outside',
+    },
+    {
+      id: 'trustyhands',
+      title: 'TrustyHands',
+      subtitle: 'Home Services Marketplace · Project Lead',
+      desc: 'A platform connecting homeowners with vetted tradespeople, with separate workspaces for clients, service providers and admins: booking and scheduling, provider verification, subscription tiers and an analytics dashboard. I led the architecture for team Git Happens.',
+      stack: ['Django', 'Python', 'MongoDB Atlas', 'Chart.js', 'Figma'],
+      cover: { icon: FaTools, from: '#4a2c0f', to: '#3C096C', tag: 'Web · Marketplace' },
+      github: 'https://github.com/Ghavish/trustyhands',
+    },
+    {
+      id: 'smartrupi',
+      title: 'SmartRupi',
+      subtitle: 'Fintech App · UoM AutoForge Hackathon 2026',
+      desc: 'A mobile finance assistant built in 12 hours as Team Lead of Team Cipher. Four coordinated AI agents flag scam emails, audit spending, suggest investments matched to the user\'s budget and risk, and match users to local bank loans.',
+      stack: ['React Native', 'Expo', 'Node.js', 'Python', 'BAND AI', 'Gemini', 'SQL Server'],
+      cover: { icon: FaShieldAlt, from: '#14532d', to: '#240046', tag: 'Mobile · Multi-agent AI' },
+      github: 'https://github.com/Ghavish/SmartRupi',
+    },
+    {
       id: 'tread',
       title: 'T.R.E.A.D Dashboard',
       subtitle: 'Telemetry, Rental & Emergency Alerts',
-      desc: 'An enterprise-grade dashboard designed for real-time telemetry monitoring, complex data filtering, and critical emergency alert management.',
-      stack: ['React', 'Tailwind CSS', 'Framer Motion', 'Node.js'],
+      desc: 'A dashboard for real-time telemetry monitoring, rental management and emergency alerts, with live asset locations on a map. I designed the database and built the dashboard as project lead.',
+      stack: ['Python', 'Streamlit', 'Pandas', 'Folium', 'SQL Server'],
       images: [
         treadHero,     // The main dashboard overview
         treadAlerts,   // The emergency action panel
         treadFilters   // The data tables and filtering
       ],
       github: 'https://github.com/Ghavish/TREAD',
-      live: '#'
     },
     {
       id: 'monte-carlo',
       title: 'Monte Carlo Simulator',
       subtitle: '2-Cashier Supermarket Queuing Model',
       desc: 'A robust statistical simulation engine visualizing queue dynamics, utilization rates, and probabilistic outcomes using Poisson distributions.',
-      stack: ['Python', 'Data Analytics', 'React', 'Math.js'],
+      stack: ['Python', 'Pandas', 'Matplotlib', 'Streamlit'],
       images: [
         MonteCarloCover, // Cover
         monteResults,  // The final charts/graphs
         monteParams    // The input/configuration screen
       ],
       github: 'https://github.com/Ghavish/MonteCarloSim',
-      live: '#'
     },
     {
       id: 'marie-solver',
@@ -80,7 +121,6 @@ export default function Projects() {
         mariemult,      // Flowchart for multiplication subroutine
         mariediv      // Flowchart for division subroutine 
       ],
-      // github: 'https://github.com/yourusername/marie-cramer',
       live: mariedocumentation
     },
     {
@@ -98,8 +138,7 @@ export default function Projects() {
         matrixsolvablesoe,
         largepowermatrices      
       ],
-      embedSrc:"https://1drv.ms/x/c/32928d0c1ff38197/IQSZ1EcthWWORKshGvQJSJ-vAQ_LshPxcBr8jdsavLfQI3g?em=2&wdAllowInteractivity=False&AllowTyping=True&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0",
-      live: '#' 
+      embedSrc: "https://1drv.ms/x/c/32928d0c1ff38197/IQSZ1EcthWWORKshGvQJSJ-vAQ_LshPxcBr8jdsavLfQI3g?em=2&wdAllowInteractivity=False&AllowTyping=True&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0",
     },
   ];
 
@@ -128,7 +167,7 @@ export default function Projects() {
             Featured <span className="text-brand-light">Projects.</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl">
-            A showcase of complex systems architecture, statistical modeling, and premium frontend execution.
+            From AI-powered mobile apps and hackathon builds to data dashboards, simulations and low-level systems work.
           </p>
         </div>
 
@@ -142,29 +181,33 @@ export default function Projects() {
               viewport={{ once: true }}
               className="bg-dark-surface border border-white/5 rounded-3xl overflow-hidden group hover:border-brand-mid/50 transition-colors flex flex-col"
             >
-              {/* Project Image Container (Clickable to open gallery) */}
-              <div 
-                onClick={() => openLightbox(project)}
-                className="relative h-64 md:h-80 w-full overflow-hidden cursor-pointer"
-              >
-                <div className="absolute inset-0 bg-brand-dark/20 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-                
-                {/* Fallback color if image isn't loaded yet */}
-                <div className="absolute inset-0 bg-dark-bg z-0"></div>
-                
-                <img 
-                  src={project.images[0]} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 relative z-0"
-                />
+              {project.images ? (
+                /* Project Image Container (Clickable to open gallery) */
+                <button
+                  type="button"
+                  onClick={() => openLightbox(project)}
+                  aria-label={`Open ${project.title} gallery`}
+                  className="relative h-64 md:h-80 w-full overflow-hidden cursor-pointer bg-dark-bg block"
+                >
+                  <img
+                    src={project.images[0]}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors duration-500"></div>
 
-                {/* View Gallery Overlay */}
-                <div className="absolute inset-0 z-20 bg-dark-bg/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                  <span className="flex items-center gap-2 px-6 py-3 bg-brand-mid text-white font-bold rounded-full shadow-[0_0_20px_rgba(123,44,191,0.5)]">
-                    <FaImages /> View UI Gallery
-                  </span>
-                </div>
-              </div>
+                  {/* View Gallery Overlay */}
+                  <div className="absolute inset-0 bg-dark-bg/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="flex items-center gap-2 px-6 py-3 bg-brand-mid text-white font-bold rounded-full shadow-[0_0_20px_rgba(123,44,191,0.5)]">
+                      <FaImages /> View UI Gallery
+                    </span>
+                  </div>
+                </button>
+              ) : (
+                <ProjectCover title={project.title} cover={project.cover} />
+              )}
 
               {/* Project Info */}
               <div className="p-8 flex-grow flex flex-col">
@@ -183,11 +226,12 @@ export default function Projects() {
                 <div className="flex items-center gap-4 mt-auto">
   
                   {/* Show GitHub icon ONLY if project.github exists and is not empty/'none' */}
-                  {project.github && project.github !== 'none' && project.github !== '#' && (
-                    <a 
-                      href={project.github} 
-                      target="_blank" 
-                      rel="noreferrer" 
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.title} on GitHub`}
                       className="text-gray-400 hover:text-white transition-colors text-xl"
                     >
                       <FaGithub />
@@ -195,11 +239,12 @@ export default function Projects() {
                   )}
 
                   {/* Show Live/External icon ONLY if project.live exists and is not empty/'none' */}
-                  {project.live && project.live !== 'none' && project.live !== '#' && (
-                    <a 
-                      href={project.live} 
-                      target="_blank" 
-                      rel="noreferrer" 
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.title} documentation`}
                       className="text-gray-400 hover:text-brand-light transition-colors text-xl"
                     >
                       <FaExternalLinkAlt />
@@ -234,10 +279,11 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)} // Click outside to close
-            className="fixed inset-0 z-50 bg-dark-bg/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-50 bg-dark-bg/95 flex items-center justify-center p-4 md:p-8"
           >
             {/* Close Button */}
-            <button 
+            <button
+              aria-label="Close gallery"
               onClick={() => setSelectedProject(null)}
               className="absolute top-6 right-6 md:top-10 md:right-10 text-gray-400 hover:text-white text-3xl z-50 transition-colors"
             >
@@ -260,10 +306,10 @@ export default function Projects() {
               {/* Navigation Arrows (Only show if more than 1 image) */}
               {selectedProject.images.length > 1 && (
                 <>
-                  <button onClick={prevImage} className="absolute left-0 md:-left-16 top-1/2 transform -translate-y-1/2 text-white bg-dark-surface/50 hover:bg-brand-mid p-3 md:p-4 rounded-full border border-white/10 hover:border-brand-light transition-all z-50">
+                  <button aria-label="Previous image" onClick={prevImage} className="absolute left-0 md:-left-16 top-1/2 transform -translate-y-1/2 text-white bg-dark-surface/50 hover:bg-brand-mid p-3 md:p-4 rounded-full border border-white/10 hover:border-brand-light transition-all z-50">
                     <FaChevronLeft className="text-xl md:text-2xl" />
                   </button>
-                  <button onClick={nextImage} className="absolute right-0 md:-right-16 top-1/2 transform -translate-y-1/2 text-white bg-dark-surface/50 hover:bg-brand-mid p-3 md:p-4 rounded-full border border-white/10 hover:border-brand-light transition-all z-50">
+                  <button aria-label="Next image" onClick={nextImage} className="absolute right-0 md:-right-16 top-1/2 transform -translate-y-1/2 text-white bg-dark-surface/50 hover:bg-brand-mid p-3 md:p-4 rounded-full border border-white/10 hover:border-brand-light transition-all z-50">
                     <FaChevronRight className="text-xl md:text-2xl" />
                   </button>
                 </>
@@ -294,5 +340,24 @@ export default function Projects() {
       </AnimatePresence>
 
     </section>
+  );
+}
+
+// Cover art for projects that don't have screenshots yet.
+function ProjectCover({ title, cover }) {
+  const Icon = cover.icon;
+  return (
+    <div
+      className="relative h-64 md:h-80 w-full overflow-hidden flex items-center justify-center"
+      style={{ background: `linear-gradient(135deg, ${cover.from}, ${cover.to} 60%, #0D0221)` }}
+    >
+      <div aria-hidden="true" className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(rgba(255,255,255,1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,1)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+      <Icon aria-hidden="true" className="absolute -right-6 -bottom-6 text-[12rem] text-white/5 transform group-hover:scale-110 transition-transform duration-700" />
+      <div className="relative text-center px-6">
+        <Icon aria-hidden="true" className="mx-auto text-5xl text-white/80 mb-4" />
+        <p className="text-3xl md:text-4xl font-bold text-white tracking-tight">{title}</p>
+        <p className="mt-2 text-xs font-bold tracking-[0.2em] uppercase text-white/60">{cover.tag}</p>
+      </div>
+    </div>
   );
 }

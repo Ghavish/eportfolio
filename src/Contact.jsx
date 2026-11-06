@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaLinkedin } from 'react-icons/fa';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 
 export default function Contact() {
@@ -37,7 +37,7 @@ export default function Contact() {
   
   return (
     <section id="contact" className="w-full bg-dark-bg py-24 md:py-32 relative overflow-hidden flex justify-center items-center">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-dark rounded-full blur-[200px] opacity-20 pointer-events-none"></div>
+      <div aria-hidden="true" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1300px] h-[1300px] pointer-events-none bg-[radial-gradient(closest-side,rgba(36,0,70,0.35),transparent)]"></div>
 
       <div className="w-full max-w-7xl mx-auto px-8 md:px-24 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16">
         

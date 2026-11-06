@@ -1,16 +1,30 @@
 import { useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import { SiFigma, SiPython, SiReact, SiJavascript, SiMysql } from 'react-icons/si';
-import { FaHtml5, FaCss3Alt } from 'react-icons/fa';
+import {
+  SiFigma, SiPython, SiReact, SiJavascript, SiTypescript, SiDjango, SiNodedotjs, SiMongodb,
+  SiExpo, SiTailwindcss, SiFirebase, SiC, SiStreamlit, SiPandas, SiFastapi,
+} from 'react-icons/si';
+import { FaHtml5, FaCss3Alt, FaDatabase, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const skillsData = [
-  { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
-  { name: 'React', icon: SiReact, color: '#61DAFB' },
-  { name: 'HTML', icon: FaHtml5, color: '#E34F26' },
-  { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-  { name: 'CSS', icon: FaCss3Alt, color: '#1572B6' },
   { name: 'Python', icon: SiPython, color: '#3776AB' },
-  { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+  { name: 'SQL', icon: FaDatabase, color: '#CC2927' },
+  { name: 'React', icon: SiReact, color: '#61DAFB' },
+  { name: 'React Native', icon: SiExpo, color: '#FFFFFF' },
+  { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+  { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+  { name: 'Node.js', icon: SiNodedotjs, color: '#5FA04E' },
+  { name: 'Django', icon: SiDjango, color: '#44B78B' },
+  { name: 'FastAPI', icon: SiFastapi, color: '#009688' },
+  { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+  { name: 'Firebase', icon: SiFirebase, color: '#FFCA28' },
+  { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+  { name: 'Pandas', icon: SiPandas, color: '#E70488' },
+  { name: 'Streamlit', icon: SiStreamlit, color: '#FF4B4B' },
+  { name: 'C', icon: SiC, color: '#A8B9CC' },
+  { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
+  { name: 'HTML', icon: FaHtml5, color: '#E34F26' },
+  { name: 'CSS', icon: FaCss3Alt, color: '#1572B6' },
 ];
 
 export default function Skills() {
@@ -22,21 +36,39 @@ export default function Skills() {
     container: carouselRef,
   });
 
+  const scrollBy = (dir) => {
+    const el = carouselRef.current;
+    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
+  };
+
   return (
     <section id="skills" className="w-full bg-dark-bg flex flex-col justify-center py-24 md:py-32 overflow-hidden relative">
       
-      <div className="w-full max-w-[1600px] mx-auto px-8 md:px-24 mb-12">
+      <div className="w-full max-w-[1600px] mx-auto px-8 md:px-24 mb-12 flex items-end justify-between gap-4">
         <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
           Skills
         </h2>
+        <div className="flex gap-3">
+          {[{ dir: -1, Icon: FaChevronLeft, label: 'Scroll skills left' }, { dir: 1, Icon: FaChevronRight, label: 'Scroll skills right' }].map(({ dir, Icon, label }) => (
+            <button
+              key={dir}
+              type="button"
+              aria-label={label}
+              onClick={() => scrollBy(dir)}
+              className="w-11 h-11 rounded-full border border-white/10 bg-dark-surface text-gray-300 hover:text-white hover:border-brand-light transition-colors flex items-center justify-center"
+            >
+              <Icon />
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Horizontal Scrolling Container */}
       <div 
         ref={carouselRef}
-        className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-8 md:px-24 pb-12 pt-4 no-scrollbar cursor-grab active:cursor-grabbing"
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-8 md:px-24 pb-12 pt-4 no-scrollbar"
       >
-        {skillsData.map((skill, index) => {
+        {skillsData.map((skill) => {
           const Icon = skill.icon;
           return (
             // Individual Skill Cards
