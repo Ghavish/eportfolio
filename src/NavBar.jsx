@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Link } from 'react-scroll';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiHome, FiUser, FiMap, FiAward, FiCode, FiBriefcase, FiMail } from 'react-icons/fi';
 
@@ -13,10 +12,74 @@ const links = [
   { to: 'contact', label: 'Contact', Icon: FiMail },
 ];
 
+// Which section is "current": the last one whose top has passed a line 40% down
+// the screen. At the very bottom of the page the last section wins, because the
+// final section is too short to ever reach that line on tall screens.
+function getCurrentSection() {
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  if (atBottom) return links[links.length - 1].to;
+  const line = window.innerHeight * 0.4;
+  let current = links[0].to;
+  for (const { to } of links) {
+    const el = document.getElementById(to);
+    if (el && el.getBoundingClientRect().top <= line) current = to;
+  }
+  return current;
+}
+
+function useActiveSection() {
+  const [active, setActive] = useState('hero');
+  // While a nav click is scrolling the page, keep the highlight on the target
+  // instead of letting it hop across every section on the way.
+  const lockRef = useRef(null);
+
+  useEffect(() => {
+    let frame = 0;
+    let idleTimer = 0;
+    const update = () => {
+      frame = 0;
+      if (!lockRef.current) setActive(getCurrentSection());
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+      // Scrolling has stopped for 150 ms: release the click lock.
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        lockRef.current = null;
+        setActive(getCurrentSection());
+      }, 150);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(frame);
+      window.clearTimeout(idleTimer);
+    };
+  }, []);
+
+  const goTo = (to) => {
+    const el = document.getElementById(to);
+    if (!el) return;
+    lockRef.current = to;
+    setActive(to);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    // Fallback release if the page didn't need to scroll at all.
+    window.setTimeout(() => {
+      if (lockRef.current === to && Math.abs(el.getBoundingClientRect().top) < 2) lockRef.current = null;
+    }, 400);
+  };
+
+  return { active, goTo };
+}
+
 // Floating glass pill: outline icons, with a filled circle that slides to the
 // section currently on screen.
 export default function Navbar() {
-  const [active, setActive] = useState('hero');
+  const { active, goTo } = useActiveSection();
 
   return (
     <nav aria-label="Sections" className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] md:bottom-auto md:top-5 left-1/2 -translate-x-1/2 z-50">
@@ -29,15 +92,12 @@ export default function Navbar() {
           const isActive = active === to;
           return (
             <li key={to} className="relative group">
-              <Link
-                to={to}
+              <a
                 href={`#${to}`}
-                spy
-                smooth
-                duration={500}
-                offset={0}
-                onSetActive={() => setActive(to)}
-                onClick={() => setActive(to)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  goTo(to);
+                }}
                 aria-label={label}
                 aria-current={isActive ? 'location' : undefined}
                 className={`relative flex items-center justify-center w-9 h-9 min-[360px]:w-10 min-[360px]:h-10 md:w-12 md:h-12 rounded-full cursor-pointer
@@ -54,7 +114,7 @@ export default function Navbar() {
                   />
                 )}
                 <Icon className="relative text-lg md:text-xl" strokeWidth={1.75} />
-              </Link>
+              </a>
 
               {/* Label shown on hover / keyboard focus (desktop) */}
               <span
