@@ -50,7 +50,7 @@ export default function Projects() {
     {
       id: 'molakaz',
       title: 'MoLakaz',
-      subtitle: 'AI Household Chore Planner · 2026',
+      subtitle: 'Meta Global AI Hackathon · Team Lead',
       desc: 'A mobile app that splits household chores fairly around each person\'s free time, then confirms each chore with a before-and-after photo checked by SAM 3.1 on a cloud GPU. Voice input runs on Whisper, and an AI assistant can rearrange the week without breaking the fairness rules.',
       stack: ['Expo', 'React Native', 'Python', 'FastAPI', 'Modal', 'SAM 3.1', 'Whisper'],
       cover: { icon: FaHome, from: '#1e3a5f', to: '#3C096C', tag: 'Mobile · AI · GPU' },
@@ -59,11 +59,13 @@ export default function Projects() {
     {
       id: 'mobudget',
       title: 'MoBudget',
-      subtitle: 'Trilingual Money Planner · Finnovate Hackathon',
+      subtitle: 'Finnovate Hackathon · Team Lead',
       desc: 'A budgeting web app for young Mauritians in English, French and Kreol Morisien. AI reads payslips, receipts, camera scans and voice notes, and a deterministic affordability check marks each savings goal as Safe, Tight or Not yet, with an AI coach that answers from the user\'s own numbers.',
       stack: ['React', 'Vite', 'Tailwind CSS', 'Firebase Auth', 'n8n', 'MongoDB', 'Gemini'],
       cover: { icon: FaWallet, from: '#0f4c4c', to: '#312e81', tag: 'Web · Fintech · AI' },
       github: 'https://github.com/Ghavish/Finnovate-Cache-Me-Outside',
+      live: 'https://cache-me-outside-topaz.vercel.app/',
+      liveLabel: 'Open the live MoBudget app',
     },
     {
       id: 'trustyhands',
@@ -77,8 +79,8 @@ export default function Projects() {
     {
       id: 'smartrupi',
       title: 'SmartRupi',
-      subtitle: 'Fintech App · UoM AutoForge Hackathon 2026',
-      desc: 'A mobile finance assistant built in 12 hours as Team Lead of Team Cipher. Four coordinated AI agents flag scam emails, audit spending, suggest investments matched to the user\'s budget and risk, and match users to local bank loans.',
+      subtitle: 'UoM AutoForge Hackathon · Team Lead',
+      desc: 'A mobile finance assistant built in 12 hours as Team Lead of Team Cipher at the UoM AutoForge Hackathon. Four coordinated AI agents flag scam emails, audit spending, suggest investments matched to the user\'s budget and risk, and match users to local bank loans.',
       stack: ['React Native', 'Expo', 'Node.js', 'Python', 'BAND AI', 'Gemini', 'SQL Server'],
       cover: { icon: FaShieldAlt, from: '#14532d', to: '#240046', tag: 'Mobile · Multi-agent AI' },
       github: 'https://github.com/Ghavish/SmartRupi',
@@ -121,7 +123,8 @@ export default function Projects() {
         mariemult,      // Flowchart for multiplication subroutine
         mariediv      // Flowchart for division subroutine 
       ],
-      live: mariedocumentation
+      live: mariedocumentation,
+      liveLabel: 'Read the MARIE Matrix Solver documentation'
     },
     {
       id: 'matrix-engine',
@@ -244,7 +247,8 @@ export default function Projects() {
                       href={project.live}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={`${project.title} documentation`}
+                      aria-label={project.liveLabel || `Open ${project.title}`}
+                      title={project.liveLabel}
                       className="text-gray-400 hover:text-brand-light transition-colors text-xl"
                     >
                       <FaExternalLinkAlt />

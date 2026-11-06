@@ -34,7 +34,7 @@ export default function App() {
       <Contact />
 
       {/* Footer */}
-      <footer className="w-full py-6 bg-dark-surface border-t border-white/5 text-center text-gray-500 text-sm">
+      <footer className="w-full pt-6 pb-24 md:pb-6 bg-dark-surface border-t border-white/5 text-center text-gray-500 text-sm">
         <p>© 2026 Subratty Ghavish. All rights reserved.</p>
       </footer>
 

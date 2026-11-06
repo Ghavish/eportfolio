@@ -15,12 +15,13 @@ This application was built to provide a centralized hub for my software developm
 ## Featured Projects
 
 ### 1. MoLakaz (AI Household Chore Planner)
-*   **Overview:** A mobile app that splits household chores fairly around each family member's free time, built at an AI hackathon.
+*   **Overview:** A mobile app that splits household chores fairly around each family member's free time, built at the Meta Global AI Hackathon, where I was Team Lead.
 *   **Key Features:** Before-and-after photo checks with SAM 3.1 on cloud GPUs, Whisper voice input, and an AI assistant that rearranges the week without breaking fairness rules.
 *   **Tech Stack:** Expo (React Native), Python, FastAPI, Modal, SAM 3.1, Whisper.
 
 ### 2. MoBudget (Trilingual Money Planner)
-*   **Overview:** A budgeting web app for young Mauritians, built with team Cache Me Outside at Finnovate.
+*   **Overview:** A budgeting web app for young Mauritians, built at the Finnovate hackathon, where I was Team Lead of team Cache Me Outside.
+*   **Live app:** https://cache-me-outside-topaz.vercel.app/
 *   **Key Features:** English, French and Kreol Morisien; AI reading of payslips, receipts, camera scans and voice notes; Safe / Tight / Not yet verdicts for savings goals; an AI coach.
 *   **Tech Stack:** React, Vite, Tailwind CSS, Firebase Auth, n8n, MongoDB, Gemini.
 

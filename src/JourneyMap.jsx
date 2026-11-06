@@ -25,13 +25,13 @@ const journeyData = [
     id: 'hackathons',
     year: '2026',
     title: 'Hackathons',
-    institution: 'UoM AutoForge · Finnovate · AI Hackathon',
+    institution: 'Meta Global AI Hackathon · Finnovate · UoM AutoForge',
     icon: FaTrophy,
-    shortDesc: 'Shipped three AI-powered products under hackathon deadlines, from multi-agent fintech to GPU-backed photo checks.',
+    shortDesc: 'Led three teams to ship AI-powered products under hackathon deadlines, from multi-agent fintech to GPU-backed photo checks.',
     details: [
-      'Team Lead of Team Cipher at the 12-hour UoM AutoForge Hackathon, building SmartRupi, a multi-agent fintech app.',
-      'Built MoBudget with team Cache Me Outside at Finnovate: a trilingual budgeting app with AI document and voice reading.',
-      'Built MoLakaz, an AI chore planner using SAM 3.1 and Whisper on Modal GPUs to verify chores from photos.'
+      'Team Lead at the Meta Global AI Hackathon, building MoLakaz, an AI chore planner that uses SAM 3.1 and Whisper on Modal GPUs to verify chores from photos.',
+      'Team Lead of Cache Me Outside at Finnovate, building MoBudget, a trilingual budgeting app with AI document and voice reading.',
+      'Team Lead of Team Cipher at the 12-hour UoM AutoForge Hackathon, building SmartRupi, a multi-agent fintech app.'
     ]
   },
   {

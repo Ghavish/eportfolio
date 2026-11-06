@@ -35,7 +35,7 @@ export default function HeroSection() {
   const { enabled, visible } = useParticles(sectionRef);
 
   return (
-    <section ref={sectionRef} id="hero" className="min-h-[100svh] w-full relative overflow-hidden flex items-center">
+    <section ref={sectionRef} id="hero" className="min-h-[100svh] w-full relative overflow-hidden flex items-center pb-24 md:pb-0">
 
       {/* Particle Background */}
       {enabled && (
@@ -90,7 +90,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
         >
-          <Link to="projects" href="#projects" smooth={true} duration={500} offset={-64}>
+          <Link to="projects" href="#projects" smooth={true} duration={500}>
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -100,7 +100,7 @@ export default function HeroSection() {
             </motion.button>
           </Link>
           
-          <Link to="about" href="#about" smooth={true} duration={500} offset={-64}>
+          <Link to="about" href="#about" smooth={true} duration={500}>
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
