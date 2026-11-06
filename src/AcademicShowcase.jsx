@@ -9,15 +9,14 @@ import businessPlanPdf from './assets/BusinessPlan.pdf';
 import vrSynopsisPdf from './assets/VR-Synopsis.pdf?url';
 
 export default function AcademicShowcase() {
-  const [activeTab, setActiveTab] = useState('reflection');
+  const [activeTab, setActiveTab] = useState('projects');
 
   const tabs = [
-    { id: 'reflection', label: 'Self-Assessment & Reflection' },
-    { id: 'projects', label: 'CBS Projects' },
+    { id: 'projects', label: 'Communication & Business' },
     { id: 'certificates', label: 'Official Certificates' }
   ];
 
- const cbsProjects = [
+  const businessProjects = [
     { 
       icon: FaUserAstronaut, 
       title: 'Ice-Breaker Presentation: Visual Storytelling', 
@@ -75,10 +74,10 @@ const certificates = [
         
         <div className="mb-12 text-center md:text-left">
           <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
-            Academic <span className="text-brand-light">Showcase.</span>
+            Leadership & <span className="text-brand-light">Credentials.</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl">
-            Highlighting key learnings, projects, and achievements from my Communication & Business Skills (CBS) module.
+            Presentations, team projects and business work that complement my technical skills, alongside my academic certificates.
           </p>
         </div>
 
@@ -108,91 +107,6 @@ const certificates = [
         <div className="min-h-[400px]">
           <AnimatePresence mode="wait">
             
-            {/* REFLECTION TAB */}
-            {activeTab === 'reflection' && (
-              <motion.div
-                key="reflection"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="bg-dark-surface border border-white/5 rounded-3xl p-8 md:p-12 shadow-xl"
-              >
-                <div className="flex flex-col lg:flex-row gap-12">
-                  
-                  {/* Left Column: The Narrative */}
-                  <div className="flex-1 space-y-8 text-gray-300 leading-relaxed">
-                    <div>
-                      <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-brand-light"></span> 
-                        The Paradigm Shift
-                      </h4>
-                      <p>
-                        Entering the Communication & Business Skills (CBS) module, my primary focus as a Computer Science student was anchored in 
-                        technical architecture and logic. I viewed software development through the lens of code and algorithms. However, this 
-                        module fundamentally shifted my paradigm, teaching me that the most robust backend systems and elegant frontends are 
-                        useless if they do not solve a tangible business problem or if their value cannot be communicated to stakeholders.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-brand-light"></span> 
-                        Navigating Challenges
-                      </h4>
-                      <p>
-                        The most significant challenge I faced was transitioning from a purely analytical mindset to an interpersonal one, 
-                        particularly during the CRM and Interview role-plays. I had to learn how to read room dynamics, practice active listening, 
-                        and adapt my communication style on the fly. Initially, articulating complex, abstract ideas to a non-technical audience was 
-                        difficult. Through iterative feedback and the collaborative environment fostered during the Team Building exercises, I 
-                        learned to translate technical jargon into clear, value-driven business language.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-brand-light"></span> 
-                        Future Application
-                      </h4>
-                      <p>
-                        The skills developed here directly bridge the gap between being an isolated programmer and being a strategic collaborator. Co-formulating the Photobooth Business Plan 
-                        taught me how to integrate my analytical skills into a broader team effort, focusing on market analysis and operational logistics. Moving forward in my professional 
-                        career, I will utilize these skills to advocate for user needs, understand the business logic behind the software I build, and effectively collaborate within 
-                        cross-functional product teams.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Right Column: Key Takeaways & Highlight Quote */}
-                  <div className="lg:w-1/3 flex flex-col gap-6">
-                    <div className="p-6 bg-brand-dark/20 border border-brand-mid/30 rounded-2xl">
-                      <h5 className="text-brand-light font-bold mb-4 uppercase tracking-wider text-sm">Core Competencies Gained</h5>
-                      <ul className="space-y-3 text-sm text-gray-300">
-                        <li className="flex items-start gap-2">
-                          <span className="text-brand-light mt-1">▹</span> Client Relationship Management
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-brand-light mt-1">▹</span> Technical to Business Translation
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-brand-light mt-1">▹</span> Product Strategy Formulation
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <span className="text-brand-light mt-1">▹</span> Conflict Resolution & Leadership
-                        </li>
-                      </ul>
-                    </div>
-
-                    <blockquote className="border-l-4 border-brand-light pl-4 py-2 italic text-gray-400">
-                      "This module taught me that engineering builds the product, but communication builds the business. Mastering both is the key 
-                      to creating real impact."
-                    </blockquote>
-                  </div>
-
-                </div>
-              </motion.div>
-            )}
-
             {/* PROJECTS TAB */}
             {activeTab === 'projects' && (
               <motion.div
@@ -203,7 +117,7 @@ const certificates = [
                 transition={{ duration: 0.3 }}
                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
               >
-                {cbsProjects.map((proj, idx) => (
+                {businessProjects.map((proj, idx) => (
                   <div key={idx} className="bg-dark-surface border border-white/5 rounded-2xl p-6 hover:border-brand-light/50 transition-colors group flex flex-col h-full">
                     <proj.icon className="text-3xl text-brand-mid mb-4 group-hover:text-brand-light transition-colors" />
                     <h4 className="text-xl font-bold text-white mb-2">{proj.title}</h4>
