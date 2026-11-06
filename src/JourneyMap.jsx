@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGraduationCap, FaLaptopCode, FaMicrochip, FaImages, FaChevronUp } from 'react-icons/fa';
+import { FaGraduationCap, FaLaptopCode, FaMicrochip, FaTrophy, FaImages, FaChevronUp, FaChevronDown } from 'react-icons/fa';
 
 import appcup0 from './assets/Appcup0.jpeg';
 import appcup1 from './assets/Appcup1.jpeg';
@@ -13,12 +13,25 @@ const journeyData = [
     title: 'BSc Computer Science',
     institution: 'University of Mauritius',
     icon: FaLaptopCode,
-    shortDesc: 'Specializing in systems architecture, full-stack development, and data analytics.',
+    shortDesc: 'Focusing on full-stack development, AI-powered applications, systems architecture and data analytics. Expected graduation: July 2028.',
     details: [
+      'Project Lead and architect for TrustyHands, a Django and MongoDB home-services marketplace built with team Git Happens.',
       'Served as Project Lead for the TREAD Dashboard, managing technical requirements and database integration.',
       'Developed low-level hardware simulations using assembly programming (MARIE Sim) and matrix mathematics.',
-      'Applied complex statistical modeling to build functional simulation software.',
-      'Transitioned robust backend logic into premium, interactive React frontend interfaces.'
+      'Applied statistical modeling to build Monte Carlo simulation software.'
+    ]
+  },
+  {
+    id: 'hackathons',
+    year: '2026',
+    title: 'Hackathons',
+    institution: 'Meta Global AI Hackathon · Finnovate · UoM AutoForge',
+    icon: FaTrophy,
+    shortDesc: 'Led three teams to ship AI-powered products under hackathon deadlines, from multi-agent fintech to GPU-backed photo checks.',
+    details: [
+      'Team Lead at the Meta Global AI Hackathon, building MoLakaz, an AI chore planner that uses SAM 3.1 and Whisper on Modal GPUs to verify chores from photos.',
+      'Team Lead of Cache Me Outside at Finnovate, building MoBudget, a trilingual budgeting app with AI document and voice reading.',
+      'Team Lead of Team Cipher at the 12-hour UoM AutoForge Hackathon, building SmartRupi, a multi-agent fintech app.'
     ]
   },
   {
@@ -83,6 +96,8 @@ const MiniGallery = ({ images }) => {
         <motion.img
           key={index}
           src={images[index]}
+          alt=""
+          decoding="async"
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
@@ -99,7 +114,7 @@ const MiniGallery = ({ images }) => {
 
 export default function Journey() {
   const [expandedId, setExpandedId] = useState('uni');
-  const [showAppCupGallery, setShowAppCupGallery] = useState(false);
+  const [showGallery, setShowGallery] = useState(false);
 
   return (
     <section id="journey" className="w-full bg-dark-bg py-24 md:py-32 relative overflow-hidden flex justify-center">
@@ -119,58 +134,35 @@ export default function Journey() {
                 className="relative pl-10 md:pl-16"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.3) }}
               >
                 <div className="absolute -left-[21px] top-2 w-10 h-10 rounded-full bg-dark-bg border-2 border-brand-mid flex items-center justify-center shadow-[0_0_15px_rgba(123,44,191,0.6)] z-10">
                   <Icon className="text-brand-light text-sm" />
                 </div>
 
-                <motion.div 
-                  layout 
-                  onMouseEnter={() => setExpandedId(item.id)}
-                  onMouseLeave={() => setExpandedId(null)}
-                  onClick={() => setExpandedId(isExpanded ? null : item.id)}
-                  className={`cursor-pointer rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isExpanded 
-                      ? 'bg-dark-surface border-brand-light shadow-[0_0_25px_rgba(123,44,191,0.15)]' 
+                <div
+                  className={`rounded-2xl border transition-[background-color,border-color,box-shadow] duration-300 overflow-hidden ${
+                    isExpanded
+                      ? 'bg-dark-surface border-brand-light shadow-[0_0_25px_rgba(123,44,191,0.15)]'
                       : 'bg-dark-surface/50 border-white/5 hover:border-white/20 hover:bg-dark-surface'
                   }`}
                 >
-                  <motion.div layout className="p-6 md:p-8">
-                    <span className="text-brand-light font-mono text-sm tracking-widest mb-2 block">{item.year}</span>
-                    <h3 className="text-2xl font-bold text-white mb-1">{item.title}</h3>
-                    <h4 className="text-lg text-gray-400 mb-4">{item.institution}</h4>
-                    <p className="text-gray-300 leading-relaxed">{item.shortDesc}</p>
-                    
-                    {/* Gallery Toggle Button - Only shows for AppCup item */}
-                    {item.id === 'appcup' && isExpanded && (
-                      <motion.button
-                        layout
-                        // Animated pulse effect to draw the eye
-                        animate={{ 
-                          boxShadow: ["0 0 0px rgba(123,44,191,0)", "0 0 15px rgba(123,44,191,0.5)", "0 0 0px rgba(123,44,191,0)"] 
-                        }}
-                        transition={{ repeat: Infinity, duration: 2 }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowAppCupGallery(!showAppCupGallery);
-                        }}
-                        className="mt-6 flex items-center justify-center gap-3 w-full py-3 px-4 bg-brand-mid/20 hover:bg-brand-mid/40 text-brand-light border border-brand-mid/40 rounded-xl transition-all font-bold text-sm tracking-wide group"
-                      >
-                        <FaImages className="text-lg group-hover:scale-120 transition-transform" />
-                        <span>{showAppCupGallery ? "HIDE GALLERY" : "EXPLORE APPCUP MOMENTS"}</span>
-                        <motion.span
-                          animate={{ x: showAppCupGallery ? 0 : [0, 5, 0] }}
-                          transition={{ repeat: Infinity, duration: 1.5 }}
-                        >
-                          {showAppCupGallery ? <FaChevronUp /> : "→"}
-                        </motion.span>
-                      </motion.button>
-                    )}
+                  <button
+                    type="button"
+                    aria-expanded={isExpanded}
+                    onClick={() => setExpandedId(isExpanded ? null : item.id)}
+                    className="w-full text-left p-6 md:p-8 cursor-pointer focus-visible:outline-2 focus-visible:outline-brand-light rounded-2xl"
+                  >
+                    <span className="flex items-start justify-between gap-4">
+                      <span className="text-brand-light font-mono text-sm tracking-widest mb-2 block">{item.year}</span>
+                      <FaChevronDown className={`text-gray-500 mt-1 shrink-0 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-brand-light' : ''}`} />
+                    </span>
+                    <span className="block text-2xl font-bold text-white mb-1">{item.title}</span>
+                    <span className="block text-lg text-gray-400 mb-4">{item.institution}</span>
+                    <span className="block text-gray-300 leading-relaxed">{item.shortDesc}</span>
+                  </button>
 
-                  </motion.div>
-                  
                   <AnimatePresence>
                     {isExpanded && (
                       <motion.div
@@ -180,8 +172,20 @@ export default function Journey() {
                         transition={{ duration: 0.3 }}
                       >
                         <div className="px-6 md:px-8 pb-8 pt-2 border-t border-white/5">
+                          {item.images && (
+                            <button
+                              type="button"
+                              onClick={() => setShowGallery(!showGallery)}
+                              className="mt-4 flex items-center justify-center gap-3 w-full py-3 px-4 bg-brand-mid/20 hover:bg-brand-mid/40 text-brand-light border border-brand-mid/40 rounded-xl transition-colors font-bold text-sm tracking-wide group"
+                            >
+                              <FaImages className="text-lg" />
+                              <span>{showGallery ? 'HIDE GALLERY' : 'EXPLORE PHOTOS'}</span>
+                              {showGallery ? <FaChevronUp /> : <span className="transition-transform group-hover:translate-x-1">→</span>}
+                            </button>
+                          )}
+
                           {/* Slideshow Display */}
-                          {item.id === 'appcup' && showAppCupGallery && (
+                          {item.images && showGallery && (
                             <motion.div
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
@@ -203,7 +207,7 @@ export default function Journey() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}

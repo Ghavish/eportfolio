@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
-import profilePic from './assets/ProfilePic.png'; 
+import profilePic from './assets/ProfilePic.webp'; 
 
 export default function AboutMe() {
   return (
     <section id="about" className="min-h-screen bg-dark-bg relative overflow-hidden flex items-center">
       
       {/* Decorative Background Element */}
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-brand-dark rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
+      <div aria-hidden="true" className="absolute bottom-0 left-1/4 w-[900px] h-[900px] -translate-x-1/4 translate-y-1/4 pointer-events-none bg-[radial-gradient(closest-side,rgba(36,0,70,0.35),transparent)]"></div>
 
       <div className="w-full max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-[1.2fr_1.5fr] items-center relative z-10">
         
@@ -21,7 +21,11 @@ export default function AboutMe() {
           
           <img 
             src={profilePic} 
-            alt="Ghavish Profile" 
+            alt="Ghavish Subratty"
+            width="1600"
+            height="1067"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full scale-[1.25] object-cover object-center opacity-95"
           />
           
@@ -55,14 +59,14 @@ export default function AboutMe() {
               architecture, I approach every challenge with a highly analytical mindset.
             </p>
             <p>
-              Recently, I have focused on translating that robust technical foundation into the frontend. I specialize in utilizing React and modern CSS frameworks to build intuitive, 
-              high-performance web applications that don't just work flawlessly behind the scenes, but feel luxurious to the user.
+              Recently, I have been building AI-powered products end to end: multi-agent fintech at hackathons, a trilingual budgeting app, and a mobile chore planner that
+              checks photos with computer vision models on cloud GPUs. I enjoy taking an idea from database design through to a polished React or React Native interface.
             </p>
           </div>
 
           {/* Quick Skills highlight */}
           <div className="mt-10 flex flex-wrap gap-3 relative z-20">
-            {['React', 'Python', 'Systems Architecture', 'Tailwind CSS', 'Data Analytics','SQL'].map((skill) => (
+            {['Python', 'React', 'React Native', 'Django', 'SQL', 'AI Agents', 'Systems Architecture'].map((skill) => (
               <span key={skill} className="px-4 py-2 bg-dark-bg border border-brand-mid rounded-full text-sm font-semibold text-brand-light shadow-[0_0_10px_rgba(60,9,108,0.3)]">
                 {skill}
               </span>
